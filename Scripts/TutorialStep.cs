@@ -11,9 +11,11 @@ namespace Omnilatent.TutorialMaker
     public class TutorialStep : MonoBehaviour
     {
         [SerializeField] TutorialData m_Data;
+        [SerializeField] ScriptableTutorialData scriptableData;
         public TutorialData GetData() => m_Data;
         public void SetData(TutorialData value) => m_Data = value;
 
+        [SerializeField] Transform displayContainer; //display object will set parent to this transform
         public bool checkOnStart = true; //set to false if you're going to chain tutorial
         [SerializeField] bool deactivateOnDone;
         [SerializeField] bool isRepeatTutorial; //if true, isDone variable won't be set on OnDoneTutorial
@@ -55,12 +57,14 @@ namespace Omnilatent.TutorialMaker
         {
             if (!isDone && TutorialManager.CanShowTutorial(m_Data))
             {
-                m_TutorialDisplay = Instantiate(m_Data.displayObject, transform).GetComponent<ITutorialDisplay>();
+                m_TutorialDisplay = Instantiate(m_Data.displayObject, displayContainer).GetComponent<ITutorialDisplay>();
                 TutorialManager.OnShowTutorial(m_Data, m_TutorialDisplay);
                 //m_TutorialDisplay.transform.SetParent(transform.parent);
                 m_TutorialDisplay.Setup(m_Data, gameObject);
+                m_TutorialDisplay.onComplete += CompleteStep;
                 //isDone = false;
                 //(m_Tut);
+                onBegin?.Invoke();
             }
         }
 
@@ -72,6 +76,12 @@ namespace Omnilatent.TutorialMaker
             }
             isUnexpectedDestroy = false;
             onComplete?.Invoke();
+            nextStep?.Init();
+        }
+
+        private void Reset()
+        {
+            displayContainer = transform;
         }
     }
 }

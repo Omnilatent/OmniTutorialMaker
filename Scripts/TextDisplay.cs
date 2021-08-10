@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -11,8 +12,7 @@ namespace Omnilatent.TutorialMaker
         [SerializeField] bool destroyOnDone = true;
         [HideInInspector] public TutorialData m_Data;
 
-        public delegate void CallbackDoneTutorial();
-        public CallbackDoneTutorial callbackDoneTutorial;
+        public Action onComplete { get; set; }
 
         bool isUnexpectedDestroy = true;
 
@@ -27,13 +27,13 @@ namespace Omnilatent.TutorialMaker
             transform.SetParent(targetTransform);
         }
 
-        public virtual void OnDoneTutorial()
+        public virtual void CompleteTutorial()
         {
             if (!TutorialManager.HasSeenTutorial(m_Data))
             {
                 isUnexpectedDestroy = false;
-                TutorialManager.CompleteTutorial(m_Data);
-                callbackDoneTutorial?.Invoke();
+                //TutorialManager.CompleteTutorial(m_Data);
+                onComplete?.Invoke();
                 if (destroyOnDone) Destroy(gameObject);
             }
         }

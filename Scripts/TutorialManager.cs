@@ -83,7 +83,7 @@ namespace Omnilatent.TutorialMaker
             bool seenAllRequireTut = true;
             for (int i = 0; i < tutData.requireTutorials.Count; i++)
             {
-                if (!HasSeenTutorial(tutData.requireTutorials[i]))
+                if (!HasSeenTutorial(tutData.requireTutorials[i].tutorialData))
                 {
                     seenAllRequireTut = false;
                     break;
