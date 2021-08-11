@@ -3,33 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialMakerExampleControl : MonoBehaviour
+namespace Omnilatent.TutorialMaker.Example
 {
-    public void ResetTutorialProgress()
+    public class TutorialMakerExampleControl : MonoBehaviour
     {
-        Omnilatent.TutorialMaker.TutorialManager.ResetData();
-        ReloadScene();
-    }
+        public void ResetTutorialProgress()
+        {
+            Omnilatent.TutorialMaker.TutorialManager.ResetData();
+            ReloadScene();
+        }
 
-    public void ReloadScene()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("ExTutorial");
-    }
+        public void ReloadScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("1+2.TM_BasicSteps");
+        }
 
-    [SerializeField] TutorialStep[] tutSteps;
+        [SerializeField] TutorialStep[] tutSteps;
 
-    public void OnRedButtonClick()
-    {
-        tutSteps[0].CompleteStepAndClearDisplay();
-    }
+        public void OnRedButtonClick()
+        {
+            tutSteps[0].CompleteStepAndClearDisplay();
+        }
 
-    public void OnBlueButtonClick()
-    {
-        tutSteps[2].CompleteStepAndClearDisplay();
-    }
+        public void OnBlueButtonClick()
+        {
+            tutSteps[2].CompleteStepAndClearDisplay();
+        }
 
-    public void OnYellowButtonClick()
-    {
-        tutSteps[1].CompleteStepAndClearDisplay();
+        public void OnYellowButtonClick()
+        {
+            tutSteps[1].CompleteStepAndClearDisplay();
+        }
     }
 }
