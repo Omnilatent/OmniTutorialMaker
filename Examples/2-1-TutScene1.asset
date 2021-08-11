@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e02ea6e3c62ff1b45a7d4d4cb6e37068, type: 3}
-  m_Name: Tutorial Data
+  m_Name: 2-1-TutScene1
   m_EditorClassIdentifier: 
   tutorialData:
-    id: 
+    id: 2-1-TutScene1
     requireTutorials: []
-    displayObject: {fileID: 0}
+    displayObject: {fileID: 515611549565646172, guid: f77ffd40f219e7a478efa0b52f7286cb,
+      type: 3}
     repeatTimes: 1
-    textDialog: 
+    textDialog: 'This is inventory scene. After you visit this scene, you will activate
+      the tutorial in shop scene.
+
+
+      Now open the shop scene and you should
+      see the next tutorial step show up.'
     saveOnDone: 0

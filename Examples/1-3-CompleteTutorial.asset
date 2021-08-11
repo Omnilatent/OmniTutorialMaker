@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e02ea6e3c62ff1b45a7d4d4cb6e37068, type: 3}
+  m_Name: 1-3-CompleteTutorial
+  m_EditorClassIdentifier: 
+  tutorialData:
+    id: 3-CompleteTutorial
+    requireTutorials: []
+    displayObject: {fileID: 515611549565646172, guid: 1ed0346b769579347971bab9163995eb,
+      type: 3}
+    repeatTimes: 1
+    textDialog: Click on this button to reload this scene and check that tutorial
+      progress have been saved, it won't be shown again.
+    saveOnDone: 1

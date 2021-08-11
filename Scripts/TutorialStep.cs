@@ -10,18 +10,30 @@ namespace Omnilatent.TutorialMaker
     /// </summary>
     public class TutorialStep : MonoBehaviour
     {
+        //You can either store tutorial data in this component or use a scriptable object
+
         [SerializeField] TutorialData m_Data;
+
+        [Tooltip("If set, scriptable data will be used and m_Data field will be ignored")]
         [SerializeField] ScriptableTutorialData scriptableData;
-        public TutorialData GetData() => m_Data;
+        public TutorialData GetData()
+        {
+            if (scriptableData != null)
+            {
+                return scriptableData.tutorialData;
+            }
+            return m_Data;
+        }
         public void SetData(TutorialData value) => m_Data = value;
 
         [SerializeField] Transform displayContainer; //display object will set parent to this transform
-        public bool checkOnStart = true; //set to false if you're going to chain tutorial
-        [SerializeField] bool deactivateOnDone;
-        [SerializeField] bool isRepeatTutorial; //if true, isDone variable won't be set on OnDoneTutorial
 
         [Tooltip("Begin this tutorial step when this step is completed")]
         [SerializeField] TutorialStep nextStep;
+
+        public bool checkOnStart = true; //set to false if you're going to chain tutorial
+        [SerializeField] bool deactivateOnDone;
+        [SerializeField] bool isRepeatTutorial; //if true, isDone variable won't be set on OnDoneTutorial
 
         [SerializeField] UnityEvent onBegin;
         [SerializeField] UnityEvent onComplete;
@@ -37,7 +49,7 @@ namespace Omnilatent.TutorialMaker
         {
             if (!isDone)
             {
-                if (TutorialManager.HasSeenTutorial(m_Data))
+                if (TutorialManager.HasSeenTutorial(GetData()))
                 {
                     isDone = true;
                     if (deactivateOnDone)
@@ -55,28 +67,34 @@ namespace Omnilatent.TutorialMaker
 
         public void Init()
         {
-            if (!isDone && TutorialManager.CanShowTutorial(m_Data))
+            if (!isDone && TutorialManager.CanShowTutorial(GetData()))
             {
-                m_TutorialDisplay = Instantiate(m_Data.displayObject, displayContainer).GetComponent<ITutorialDisplay>();
-                TutorialManager.OnShowTutorial(m_Data, m_TutorialDisplay);
+                m_TutorialDisplay = Instantiate(GetData().displayObject, displayContainer).GetComponent<ITutorialDisplay>();
+                TutorialManager.OnShowTutorial(GetData(), m_TutorialDisplay);
                 //m_TutorialDisplay.transform.SetParent(transform.parent);
-                m_TutorialDisplay.Setup(m_Data, gameObject);
-                m_TutorialDisplay.onComplete += CompleteStep;
+                m_TutorialDisplay.Setup(GetData(), gameObject);
+                m_TutorialDisplay.callbackToStepObject += CompleteStep;
                 //isDone = false;
                 //(m_Tut);
                 onBegin?.Invoke();
             }
         }
 
-        public void CompleteStep()
+        internal void CompleteStep()
         {
-            if (!TutorialManager.HasSeenTutorial(m_Data))
+            if (!TutorialManager.HasSeenTutorial(GetData()))
             {
-                TutorialManager.CompleteTutorial(m_Data);
+                TutorialManager.CompleteTutorial(GetData());
             }
             isUnexpectedDestroy = false;
             onComplete?.Invoke();
             nextStep?.Init();
+        }
+
+        public void CompleteStepAndClearDisplay()
+        {
+            m_TutorialDisplay.OnDisplayClicked(false);
+            CompleteStep();
         }
 
         private void Reset()

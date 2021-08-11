@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e02ea6e3c62ff1b45a7d4d4cb6e37068, type: 3}
+  m_Name: 2-2-TutScene2
+  m_EditorClassIdentifier: 
+  tutorialData:
+    id: 2-2-TutScene2
+    requireTutorials:
+    - {fileID: 11400000, guid: de5642344bee5de4489ce5ee9e20ef8b, type: 2}
+    displayObject: {fileID: 515611549565646172, guid: f77ffd40f219e7a478efa0b52f7286cb,
+      type: 3}
+    repeatTimes: 1
+    textDialog: You should only be able to see this dialogue after you have completed
+      the tutorial step 2-1.
+    saveOnDone: 1

@@ -45,5 +45,14 @@ namespace Omnilatent.TutorialMaker
                 }
             }
         }
+
+        private void OnEnable()
+        {
+            if (string.IsNullOrEmpty(tutorialData.Id))
+            {
+                Debug.Log($"{name}'s data's ID has been set to default value");
+                tutorialData.Id = name;
+            }
+        }
     }
 }

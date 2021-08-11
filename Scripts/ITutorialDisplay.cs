@@ -7,8 +7,13 @@ namespace Omnilatent.TutorialMaker
 {
     public interface ITutorialDisplay
     {
-        Action onComplete { get; set; }
+        Action callbackToStepObject { get; set; }
         void Setup(TutorialData data, GameObject initObject = null);
-        void CompleteTutorial();
+
+        /// <summary>
+        /// Call when the display object is clicked.
+        /// </summary>
+        /// <param name="callbackToStepObj">If true, click on this object will callback step complete to the TutorialStep who created this display</param>
+        void OnDisplayClicked(bool callbackToStepObj);
     }
 }

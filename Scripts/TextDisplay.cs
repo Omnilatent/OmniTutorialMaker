@@ -3,18 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Omnilatent.TutorialMaker
 {
     public class TextDisplay : MonoBehaviour, ITutorialDisplay
     {
         [SerializeField] protected TMP_Text textDialog;
+        [SerializeField] Button dialogueButton;
         [SerializeField] bool destroyOnDone = true;
         [HideInInspector] public TutorialData m_Data;
 
-        public Action onComplete { get; set; }
+        public Action callbackToStepObject { get; set; }
 
         bool isUnexpectedDestroy = true;
+
+        private void Start()
+        {
+            if (dialogueButton != null)
+            {
+                dialogueButton.onClick.AddListener(() =>
+                {
+                    OnDisplayClicked(true);
+                });
+            }
+        }
 
         public virtual void Setup(TutorialData data, GameObject initObject = null)
         {
@@ -27,15 +40,16 @@ namespace Omnilatent.TutorialMaker
             transform.SetParent(targetTransform);
         }
 
-        public virtual void CompleteTutorial()
+        public virtual void OnDisplayClicked(bool callbackToStepObj)
         {
-            if (!TutorialManager.HasSeenTutorial(m_Data))
-            {
-                isUnexpectedDestroy = false;
-                //TutorialManager.CompleteTutorial(m_Data);
-                onComplete?.Invoke();
-                if (destroyOnDone) Destroy(gameObject);
-            }
+            //if (!TutorialManager.HasSeenTutorial(m_Data))
+            //{
+            isUnexpectedDestroy = false;
+            //TutorialManager.CompleteTutorial(m_Data);
+            if (callbackToStepObj)
+                callbackToStepObject?.Invoke();
+            if (destroyOnDone) Destroy(gameObject);
+            //}
         }
 
         private void OnDestroy()
