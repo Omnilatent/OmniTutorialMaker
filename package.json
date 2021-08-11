@@ -1,0 +1,13 @@
+{
+    "name": "com.omnilatent.tutorialmaker",
+    "displayName": "Omni Tutorial Maker",
+    "version": "0.1",
+    "unity": "2018.1",
+    "description": "Make in-game tutorial easy. \n https://github.com/Omnilatent/TutorialMaker",
+    "keywords": ["tutorial"],
+    "category": "Helper",
+    "dependencies":
+    {
+    },
+    "documentationUrl": "https://github.com/Omnilatent/TutorialMaker"
+}

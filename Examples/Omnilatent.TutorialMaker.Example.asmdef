@@ -1,0 +1,15 @@
+{
+    "name": "Omnilatent.TutorialMaker.Example",
+    "references": [
+        "GUID:2c5ac7152d21a45409662ba66ef0dd52"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
