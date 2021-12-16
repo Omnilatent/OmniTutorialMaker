@@ -35,6 +35,8 @@ namespace Omnilatent.TutorialMaker
             if (textDialog != null) { textDialog.text = data.textDialog; }
         }
 
+        public virtual Transform GetTransform() { return transform; }
+
         void SetParent(Transform targetTransform)
         {
             transform.SetParent(targetTransform);

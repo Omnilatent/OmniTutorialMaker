@@ -8,6 +8,7 @@ namespace Omnilatent.TutorialMaker
     public interface ITutorialDisplay
     {
         Action callbackToStepObject { get; set; }
+        Transform GetTransform();
         void Setup(TutorialData data, GameObject initObject = null);
 
         /// <summary>
