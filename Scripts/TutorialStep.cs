@@ -83,6 +83,7 @@ namespace Omnilatent.TutorialMaker
 
         internal void CompleteStep()
         {
+            isDone = true;
             if (!TutorialManager.HasSeenTutorial(GetData()))
             {
                 TutorialManager.CompleteTutorial(GetData());
@@ -94,8 +95,11 @@ namespace Omnilatent.TutorialMaker
 
         public void CompleteStepAndClearDisplay()
         {
-            m_TutorialDisplay.OnDisplayClicked(false);
-            CompleteStep();
+            if (!isDone)
+            {
+                m_TutorialDisplay.OnDisplayClicked(false);
+                CompleteStep();
+            }
         }
 
         private void Reset()
