@@ -45,6 +45,9 @@ namespace Omnilatent.TutorialMaker
         public bool IsDone { get => isDone; set => isDone = value; }
         bool isUnexpectedDestroy;
 
+        bool initialized = false;
+        public bool IsInitialized() => initialized;
+
         void Start()
         {
             if (!isDone)
@@ -78,6 +81,7 @@ namespace Omnilatent.TutorialMaker
                 //isDone = false;
                 //(m_Tut);
                 onBegin?.Invoke();
+                initialized = true;
             }
         }
 
@@ -97,6 +101,11 @@ namespace Omnilatent.TutorialMaker
         {
             if (!isDone)
             {
+                if (!initialized)
+                {
+                    Debug.LogError($"Step {gameObject.name} need to be initialized first before completing");
+                    return;
+                }
                 m_TutorialDisplay.OnDisplayClicked(false);
                 CompleteStep();
             }
