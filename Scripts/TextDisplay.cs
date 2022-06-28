@@ -11,14 +11,14 @@ namespace Omnilatent.TutorialMaker
     {
         [SerializeField] protected TMP_Text textDialog;
         [SerializeField] Button dialogueButton;
-        [SerializeField] bool destroyOnDone = true;
+        [SerializeField] protected bool destroyOnDone = true;
         [HideInInspector] public TutorialData m_Data;
 
         public Action callbackToStepObject { get; set; }
 
-        bool isUnexpectedDestroy = true;
+        protected bool isUnexpectedDestroy = true;
 
-        private void Start()
+        protected virtual void Start()
         {
             if (dialogueButton != null)
             {
@@ -53,6 +53,7 @@ namespace Omnilatent.TutorialMaker
             if (destroyOnDone) Destroy(gameObject);
             //}
         }
+
 
         private void OnDestroy()
         {
