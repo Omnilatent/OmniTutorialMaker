@@ -26,7 +26,7 @@ namespace Omnilatent.TutorialMaker
         }
         public void SetData(TutorialData value) => m_Data = value;
 
-        [SerializeField] Transform displayContainer; //display object will set parent to this transform
+        [SerializeField] protected Transform displayContainer; //display object will set parent to this transform
 
         [Tooltip("Begin this tutorial step when this step is completed")]
         [SerializeField] TutorialStep nextStep;
@@ -35,17 +35,17 @@ namespace Omnilatent.TutorialMaker
         [SerializeField] bool deactivateOnDone;
         [SerializeField] bool isRepeatTutorial; //if true, isDone variable won't be set on OnDoneTutorial
 
-        [SerializeField] UnityEvent onBegin;
+        [SerializeField] protected UnityEvent onBegin;
         [SerializeField] UnityEvent onComplete;
 
-        ITutorialDisplay m_TutorialDisplay;
+        protected ITutorialDisplay m_TutorialDisplay;
         public ITutorialDisplay GetTutorialDisplay() => m_TutorialDisplay;
 
-        bool isDone;
+        protected bool isDone;
         public bool IsDone { get => isDone; set => isDone = value; }
         bool isUnexpectedDestroy;
 
-        bool initialized = false;
+        protected bool initialized = false;
         public bool IsInitialized() => initialized;
 
         void Start()
@@ -68,7 +68,7 @@ namespace Omnilatent.TutorialMaker
             }
         }
 
-        public void Init()
+        public virtual void Init()
         {
             if (!isDone && TutorialManager.CanShowTutorial(GetData()))
             {
@@ -85,7 +85,7 @@ namespace Omnilatent.TutorialMaker
             }
         }
 
-        internal void CompleteStep()
+        protected void CompleteStep()
         {
             isDone = true;
             if (!TutorialManager.HasSeenTutorial(GetData()))
