@@ -14,7 +14,7 @@ namespace Omnilatent.TutorialMaker
         [SerializeField] protected bool destroyOnDone = true;
         [HideInInspector] public TutorialData m_Data;
 
-        public Action callbackToStepObject { get; set; }
+        public Action onComplete { get; set; }
 
         protected bool isUnexpectedDestroy = true;
 
@@ -49,7 +49,7 @@ namespace Omnilatent.TutorialMaker
             isUnexpectedDestroy = false;
             //TutorialManager.CompleteTutorial(m_Data);
             if (callbackToStepObj)
-                callbackToStepObject?.Invoke();
+                onComplete?.Invoke();
             if (destroyOnDone) Destroy(gameObject);
             //}
         }

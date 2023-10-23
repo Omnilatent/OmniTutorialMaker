@@ -77,7 +77,7 @@ namespace Omnilatent.TutorialMaker
                 TutorialManager.OnShowTutorial(GetData(), m_TutorialDisplay);
                 m_TutorialDisplay.GetTransform().SetParent(displayContainer);
                 m_TutorialDisplay.Setup(GetData(), gameObject);
-                m_TutorialDisplay.callbackToStepObject += CompleteStep;
+                m_TutorialDisplay.onComplete += CompleteStep;
                 //isDone = false;
                 //(m_Tut);
                 onBegin?.Invoke();

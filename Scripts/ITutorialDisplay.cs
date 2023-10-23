@@ -7,7 +7,11 @@ namespace Omnilatent.TutorialMaker
 {
     public interface ITutorialDisplay
     {
-        Action callbackToStepObject { get; set; }
+        // [Obsolete("Use onComplete instead", true)]   
+        // Action callbackToStepObject { get; set; }
+
+        Action onComplete { get; set; }
+
         Transform GetTransform();
         void Setup(TutorialData data, GameObject initObject = null);
 
