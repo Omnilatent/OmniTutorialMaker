@@ -73,9 +73,8 @@ namespace Omnilatent.TutorialMaker
             if (!isDone && TutorialManager.CanShowTutorial(GetData()))
             {
                 //Tutorial Display will be instantiated as child of the TutorialStep's transform. Then it will set parent to displayContainer
-                m_TutorialDisplay = Instantiate(GetData().displayObject, transform).GetComponent<ITutorialDisplay>();
+                m_TutorialDisplay = Instantiate(GetData().displayObject, displayContainer).GetComponent<ITutorialDisplay>();
                 TutorialManager.OnShowTutorial(GetData(), m_TutorialDisplay);
-                m_TutorialDisplay.GetTransform().SetParent(displayContainer);
                 m_TutorialDisplay.Setup(GetData(), gameObject);
                 m_TutorialDisplay.onComplete += CompleteStep;
                 //isDone = false;
